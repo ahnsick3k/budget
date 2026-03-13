@@ -27,11 +27,11 @@ export default function DashboardView({ transactions }: DashboardViewProps) {
   const pieData = Object.entries(categorySummary).map(([name, value]) => ({ name, value })).sort((a,b) => b.value - a.value);
 
   return (
-    <div className="bg-white/70 backdrop-blur-md rounded-3xl p-6 shadow-sm border border-white/20 h-[450px] flex flex-col">
-      <h2 className="text-xl font-bold mb-4 text-gray-800">카테고리별 지출 통계</h2>
+    <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-3xl p-6 shadow-sm border border-white/20 dark:border-white/5 h-[450px] flex flex-col transition-colors">
+      <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-atl-dark-text-strong">카테고리별 지출 통계</h2>
       
       {pieData.length === 0 ? (
-        <div className="flex-1 flex items-center justify-center text-gray-500">
+        <div className="flex-1 flex items-center justify-center text-gray-500 dark:text-atl-dark-text">
           이번 달 지출 내역이 없습니다.
         </div>
       ) : (
@@ -54,7 +54,7 @@ export default function DashboardView({ transactions }: DashboardViewProps) {
                 ))}
               </Pie>
               <Tooltip 
-                formatter={(value: any) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(value)}
+                formatter={(value: any /* eslint-disable-line */) => new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(value)}
               />
               <Legend verticalAlign="bottom" height={36}/>
             </PieChart>

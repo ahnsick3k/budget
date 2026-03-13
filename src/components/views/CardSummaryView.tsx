@@ -32,14 +32,14 @@ export default function CardSummaryView({ transactions }: CardSummaryViewProps) 
   const totalExpense = expenses.reduce((sum, t) => sum + t.amount, 0);
 
   return (
-    <div className="bg-white/70 backdrop-blur-md rounded-3xl p-6 shadow-sm border border-white/20">
+    <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-3xl p-6 shadow-sm border border-white/20 dark:border-white/5 transition-colors">
       <div className="flex items-center gap-3 mb-6">
-        <CreditCard className="text-socar-500" size={24} />
-        <h2 className="text-xl font-bold text-gray-800">결제 수단별 분석</h2>
+        <CreditCard className="text-atl-blue-500 dark:text-atl-blue-400" size={24} />
+        <h2 className="text-xl font-bold text-gray-800 dark:text-atl-dark-text-strong">결제 수단별 분석</h2>
       </div>
 
       {sortedSummary.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-gray-500 dark:text-atl-dark-text">
           이번 달 지출 내역이 없습니다.
         </div>
       ) : (
@@ -47,16 +47,16 @@ export default function CardSummaryView({ transactions }: CardSummaryViewProps) 
           {sortedSummary.map(([method, amount]) => {
             const percentage = Math.round((amount / totalExpense) * 100) || 0;
             return (
-              <div key={method} className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-2">
+              <div key={method} className="bg-white dark:bg-atl-dark-bg p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-white/10 flex flex-col gap-2 transition-colors">
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold text-gray-800">{method}</span>
-                  <span className="font-bold text-rose-600">{formatCurrency(amount)}</span>
+                  <span className="font-semibold text-gray-800 dark:text-atl-dark-text-strong">{method}</span>
+                  <span className="font-bold text-rose-600 dark:text-rose-400">{formatCurrency(amount)}</span>
                 </div>
                 {/* Progress bar */}
-                <div className="w-full bg-gray-100 rounded-full h-2.5">
-                  <div className="bg-rose-500 h-2.5 rounded-full" style={{ width: `${percentage}%` }}></div>
+                <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2.5">
+                  <div className="bg-rose-500 dark:bg-rose-400 h-2.5 rounded-full" style={{ width: `${percentage}%` }}></div>
                 </div>
-                <div className="text-xs text-gray-400 text-right">{percentage}%</div>
+                <div className="text-xs text-gray-400 dark:text-gray-500 text-right">{percentage}%</div>
               </div>
             );
           })}

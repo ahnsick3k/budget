@@ -30,12 +30,12 @@ export default function CalendarView({ transactions }: CalendarViewProps) {
   };
 
   return (
-    <div className="bg-white/70 backdrop-blur-md rounded-3xl p-6 shadow-sm border border-white/20 overflow-hidden">
-      <h2 className="text-xl font-bold mb-6 text-gray-800">이번 달 달력</h2>
+    <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-3xl p-6 shadow-sm border border-white/20 dark:border-white/5 overflow-hidden transition-colors">
+      <h2 className="text-xl font-bold mb-6 text-gray-800 dark:text-atl-dark-text-strong">이번 달 달력</h2>
       
       <div className="grid grid-cols-7 gap-1 mb-2">
         {['일', '월', '화', '수', '목', '금', '토'].map(day => (
-          <div key={day} className="text-center font-medium text-sm text-gray-500 py-2">
+          <div key={day} className="text-center font-medium text-sm text-gray-500 dark:text-gray-400 py-2">
             {day}
           </div>
         ))}
@@ -50,16 +50,16 @@ export default function CalendarView({ transactions }: CalendarViewProps) {
           return (
             <div 
               key={day.toISOString()} 
-              className={`min-h-[80px] p-1 sm:p-2 rounded-xl border ${
-                isToday(day) ? 'border-socar-400 bg-socar-50/50' : 'border-gray-100 bg-white'
+              className={`min-h-[80px] p-1 sm:p-2 rounded-xl border transition-colors ${
+                isToday(day) ? 'border-atl-blue-400 dark:border-atl-blue-500 bg-atl-blue-50/50 dark:bg-atl-blue-900/20' : 'border-gray-100 dark:border-white/5 bg-white dark:bg-atl-dark-bg'
               } ${!isSameMonth(day, currentDate) ? 'opacity-40' : ''}`}
             >
-              <div className={`text-xs sm:text-sm font-medium mb-1 ${isToday(day) ? 'text-socar-600' : 'text-gray-700'}`}>
+              <div className={`text-xs sm:text-sm font-medium mb-1 ${isToday(day) ? 'text-atl-blue-600 dark:text-atl-blue-400' : 'text-gray-700 dark:text-gray-400'}`}>
                 {format(day, 'd')}
               </div>
               <div className="space-y-1">
-                {income > 0 && <div className="text-[10px] sm:text-xs text-emerald-600 font-semibold truncate">+{formatCurrency(income)}</div>}
-                {expense > 0 && <div className="text-[10px] sm:text-xs text-rose-600 font-semibold truncate">-{formatCurrency(expense)}</div>}
+                {income > 0 && <div className="text-[10px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-semibold truncate">+{formatCurrency(income)}</div>}
+                {expense > 0 && <div className="text-[10px] sm:text-xs text-rose-600 dark:text-rose-400 font-semibold truncate">-{formatCurrency(expense)}</div>}
               </div>
             </div>
           );

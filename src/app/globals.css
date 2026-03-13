@@ -2,18 +2,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-socar-50: #e5f8ff;
-  --color-socar-100: #ccf1ff;
-  --color-socar-200: #99e4ff;
-  --color-socar-300: #66d6ff;
-  --color-socar-400: #33c9ff;
-  --color-socar-500: #00b8ff;
-  --color-socar-600: #0093cc;
-  --color-socar-700: #006e99;
-  --color-socar-800: #004a66;
-  --color-socar-900: #002533;
+  /* Atlassian Color Palette */
+  --color-atl-blue-50: #DEEBFF;
+  --color-atl-blue-100: #B3D4FF;
+  --color-atl-blue-200: #4C9AFF;
+  --color-atl-blue-300: #2684FF;
+  --color-atl-blue-400: #0065FF;
+  --color-atl-blue-500: #0052CC; /* Primary Brand */
+  --color-atl-blue-600: #0747A6;
+  --color-atl-blue-700: #083A8A;
+  --color-atl-blue-800: #09326C;
+  --color-atl-blue-900: #092957;
 
-  --color-socar-dark: #1A1F2C; /* Navy Dark Base */
+  /* Atlassian Dark Mode Neutrals */
+  --color-atl-dark-bg: #1D2125;
+  --color-atl-dark-surface: #22272B;
+  --color-atl-dark-border: #A6C5E229; /* 16% opacity */
+  --color-atl-dark-text: #B6C2CF;
+  --color-atl-dark-text-strong: #DCDFE4;
 
   --font-sans: 'Pretendard', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }

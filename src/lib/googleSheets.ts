@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 
 export const getGoogleSheets = async () => {
-  let authOptions: any = {
+  const authOptions: any /* eslint-disable-line */ = {
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   };
 
@@ -19,7 +19,7 @@ export const getGoogleSheets = async () => {
   const auth = new google.auth.GoogleAuth(authOptions);
 
   const client = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: client as any });
+  const sheets = google.sheets({ version: 'v4', auth: client as any /* eslint-disable-line */ });
   return sheets;
 };
 

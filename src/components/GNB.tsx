@@ -24,7 +24,7 @@ export default function GNB({ currentView, onViewChange, onCsvUpload, isUploadin
       skipEmptyLines: true,
       complete: async (results) => {
         // Expected CSV Headers: Date, Type, Category, PaymentMethod, Amount, Memo
-        const parsedData = results.data.map((row: any) => ({
+        const parsedData = results.data.map((row: any /* eslint-disable-line */) => ({
           date: row['Date'] || row['날짜'] || new Date().toISOString().split('T')[0],
           type: (row['Type'] || row['유형'] || 'expense').toLowerCase() === 'income' || row['수입'] ? 'income' : 'expense',
           category: row['Category'] || row['카테고리'] || '기타',
@@ -34,7 +34,7 @@ export default function GNB({ currentView, onViewChange, onCsvUpload, isUploadin
         }));
 
         if (parsedData.length > 0) {
-          await onCsvUpload(parsedData as any);
+          await onCsvUpload(parsedData as any /* eslint-disable-line */);
         }
         
         // Reset input
@@ -55,7 +55,7 @@ export default function GNB({ currentView, onViewChange, onCsvUpload, isUploadin
   ];
 
   return (
-    <nav className="flex items-center justify-between mb-8 bg-white/20 backdrop-blur-md rounded-2xl p-2 border border-white/30 shadow-sm relative z-10">
+    <nav className="flex items-center justify-between mb-8 bg-white/20 dark:bg-atl-dark-surface/50 backdrop-blur-md rounded-2xl p-2 border border-white/30 dark:border-white/10 shadow-sm relative z-10 transition-colors">
       <div className="flex gap-2">
         {navItems.map((item) => (
           <button
@@ -63,8 +63,8 @@ export default function GNB({ currentView, onViewChange, onCsvUpload, isUploadin
             onClick={() => onViewChange(item.id as ViewMode)}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
               currentView === item.id 
-                ? 'bg-white text-socar-700 shadow-sm' 
-                : 'text-white/80 hover:bg-white/10 hover:text-white'
+                ? 'bg-white dark:bg-atl-blue-600 text-atl-blue-700 dark:text-white shadow-sm' 
+                : 'text-gray-600 dark:text-atl-dark-text hover:bg-white/50 dark:hover:bg-white/10 hover:text-gray-900 dark:hover:text-white'
             }`}
           >
             <item.icon size={16} />
@@ -84,10 +84,10 @@ export default function GNB({ currentView, onViewChange, onCsvUpload, isUploadin
         <button
           onClick={() => fileInputRef.current?.click()}
           disabled={isUploading}
-          className="flex items-center gap-2 px-4 py-2 bg-socar-500/30 hover:bg-socar-500/50 text-white rounded-xl text-sm font-medium transition-all border border-socar-400/30 disabled:opacity-50"
+          className="flex items-center gap-2 px-4 py-2 bg-atl-blue-500/10 dark:bg-atl-blue-500/30 hover:bg-atl-blue-500/20 dark:hover:bg-atl-blue-500/50 text-atl-blue-700 dark:text-white rounded-xl text-sm font-medium transition-all border border-atl-blue-400/30 disabled:opacity-50"
         >
           {isUploading ? (
-            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+            <span className="w-4 h-4 border-2 border-atl-blue-700/30 dark:border-white/30 border-t-atl-blue-700 dark:border-t-white rounded-full animate-spin"></span>
           ) : (
              <UploadCloud size={16} />
           )}

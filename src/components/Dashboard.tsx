@@ -32,34 +32,34 @@ export default function Dashboard({ transactions }: DashboardProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       {/* Balance Card */}
-      <div className="bg-white/70 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/20">
-        <div className="flex items-center gap-3 mb-2 text-gray-600">
-          <Wallet className="w-5 h-5 text-socar-500" />
+      <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/20 dark:border-white/5 transition-colors">
+        <div className="flex items-center gap-3 mb-2 text-gray-600 dark:text-atl-dark-text">
+          <Wallet className="w-5 h-5 text-atl-blue-500 dark:text-atl-blue-400" />
           <h3 className="font-medium text-sm">이번 달 잔액</h3>
         </div>
-        <p className={`text-3xl font-bold ${balance >= 0 ? 'text-gray-900' : 'text-red-500'}`}>
+        <p className={`text-3xl font-bold ${balance >= 0 ? 'text-gray-900 dark:text-atl-dark-text-strong' : 'text-red-500 dark:text-red-400'}`}>
           {formatCurrency(balance)}
         </p>
       </div>
 
       {/* Income Card */}
-      <div className="bg-white/70 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/20">
-        <div className="flex items-center gap-3 mb-2 text-gray-600">
-          <ArrowUpCircle className="w-5 h-5 text-emerald-500" />
+      <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/20 dark:border-white/5 transition-colors">
+        <div className="flex items-center gap-3 mb-2 text-gray-600 dark:text-atl-dark-text">
+          <ArrowUpCircle className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
           <h3 className="font-medium text-sm">이번 달 수입</h3>
         </div>
-        <p className="text-3xl font-bold text-emerald-600">
+        <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
           {formatCurrency(income)}
         </p>
       </div>
 
       {/* Expense Card */}
-      <div className="bg-white/70 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/20">
-        <div className="flex items-center gap-3 mb-2 text-gray-600">
-          <ArrowDownCircle className="w-5 h-5 text-rose-500" />
+      <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/20 dark:border-white/5 transition-colors">
+        <div className="flex items-center gap-3 mb-2 text-gray-600 dark:text-atl-dark-text">
+          <ArrowDownCircle className="w-5 h-5 text-rose-500 dark:text-rose-400" />
           <h3 className="font-medium text-sm">이번 달 지출</h3>
         </div>
-        <p className="text-3xl font-bold text-rose-600">
+        <p className="text-3xl font-bold text-rose-600 dark:text-rose-400">
           {formatCurrency(expense)}
         </p>
       </div>

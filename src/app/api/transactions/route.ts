@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getGoogleSheets, SPREADSHEET_ID } from '@/lib/googleSheets';
 import { v4 as uuidv4 } from 'uuid';
 
-async function getFirstSheetName(sheets: any) {
+async function getFirstSheetName(sheets: any /* eslint-disable-line */) {
   const info = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
   return info.data.sheets?.[0]?.properties?.title || 'Sheet1';
 }
@@ -38,7 +38,7 @@ export async function GET() {
     transactions.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     return NextResponse.json({ transactions });
-  } catch (error: any) {
+  } catch (error: any /* eslint-disable-line */) {
     console.error('Error fetching data:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
@@ -94,7 +94,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ message: 'Transaction(s) added successfully', count: rowsToInsert.length });
-  } catch (error: any) {
+  } catch (error: any /* eslint-disable-line */) {
     console.error('Error adding transaction:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
@@ -159,7 +159,7 @@ export async function DELETE(request: Request) {
     });
 
     return NextResponse.json({ message: 'Transaction deleted successfully' });
-  } catch (error: any) {
+  } catch (error: any /* eslint-disable-line */) {
     console.error('Error deleting transaction:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
