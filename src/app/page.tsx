@@ -9,7 +9,8 @@ import GNB, { ViewMode } from '@/components/GNB';
 import CalendarView from '@/components/views/CalendarView';
 import CardSummaryView from '@/components/views/CardSummaryView';
 import DashboardView from '@/components/views/DashboardView';
-import { Wallet } from 'lucide-react';
+import { Wallet, Moon, Sun, Globe } from 'lucide-react';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 export default function Home() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -17,6 +18,7 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCsvUploading, setIsCsvUploading] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('list');
+  const { theme, toggleTheme, language, toggleLanguage } = useTheme();
 
   useEffect(() => {
     fetchTransactions();
@@ -107,16 +109,38 @@ export default function Home() {
       <div className="bg-atl-blue-600 dark:bg-atl-blue-800 h-64 absolute top-0 left-0 w-full -z-10 rounded-b-[3rem] shadow-sm transition-colors duration-200"></div>
 
       <main className="max-w-4xl mx-auto px-4 pt-12">
-        <header className="mb-8 text-white flex justify-between items-end">
+        <header className="mb-8 text-white flex justify-between items-start sm:items-end flex-col sm:flex-row gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight mb-2 opacity-95 flex items-center gap-2">
+            <h1 className="text-3xl font-extrabold tracking-tight mb-2 flex items-center gap-2 text-white">
               <Wallet className="w-8 h-8" />
-              나의 가계부
+              {language === 'kr' ? '나의 가계부' : 'My BudgetBook'}
             </h1>
-            <p className="text-atl-blue-100/80 font-medium">스마트하게 관리하는 자산 현황</p>
+            <p className="text-white font-medium">
+              {language === 'kr' ? '스마트하게 관리하는 자산 현황' : 'Managing your assets smartly'}
+            </p>
           </div>
-          <div className="flex gap-2">
-            <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm shadow flex items-center justify-center border border-white/30 text-white font-bold">
+          <div className="flex gap-3 items-center">
+            {/* Language Toggle */}
+            <button 
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm shadow border border-white/30 text-white font-medium text-sm transition-colors"
+              title="언어 변경 / Language"
+            >
+              <Globe size={16} />
+              {language === 'kr' ? 'EN' : 'KR'}
+            </button>
+
+            {/* Theme Toggle */}
+            <button 
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm shadow border border-white/30 text-white transition-colors"
+              title="테마 변경 / Theme"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            {/* User Avatar */}
+            <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm shadow flex items-center justify-center border border-white/30 text-white font-bold ml-2">
               Me
             </div>
           </div>

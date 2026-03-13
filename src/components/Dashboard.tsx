@@ -1,12 +1,14 @@
 import React from 'react';
 import { Transaction } from '@/types';
 import { ArrowDownCircle, ArrowUpCircle, Wallet } from 'lucide-react';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface DashboardProps {
   transactions: Transaction[];
 }
 
 export default function Dashboard({ transactions }: DashboardProps) {
+  const { language } = useTheme();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
 
@@ -35,7 +37,9 @@ export default function Dashboard({ transactions }: DashboardProps) {
       <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/20 dark:border-white/5 transition-colors">
         <div className="flex items-center gap-3 mb-2 text-gray-600 dark:text-atl-dark-text">
           <Wallet className="w-5 h-5 text-atl-blue-500 dark:text-atl-blue-400" />
-          <h3 className="font-medium text-sm">이번 달 잔액</h3>
+          <h3 className="font-medium text-sm">
+            {language === 'kr' ? '이번 달 잔액' : "This Month's Balance"}
+          </h3>
         </div>
         <p className={`text-3xl font-bold ${balance >= 0 ? 'text-gray-900 dark:text-atl-dark-text-strong' : 'text-red-500 dark:text-red-400'}`}>
           {formatCurrency(balance)}
@@ -46,7 +50,9 @@ export default function Dashboard({ transactions }: DashboardProps) {
       <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/20 dark:border-white/5 transition-colors">
         <div className="flex items-center gap-3 mb-2 text-gray-600 dark:text-atl-dark-text">
           <ArrowUpCircle className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
-          <h3 className="font-medium text-sm">이번 달 수입</h3>
+          <h3 className="font-medium text-sm">
+            {language === 'kr' ? '이번 달 수입' : "This Month's Income"}
+          </h3>
         </div>
         <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
           {formatCurrency(income)}
@@ -57,7 +63,9 @@ export default function Dashboard({ transactions }: DashboardProps) {
       <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/20 dark:border-white/5 transition-colors">
         <div className="flex items-center gap-3 mb-2 text-gray-600 dark:text-atl-dark-text">
           <ArrowDownCircle className="w-5 h-5 text-rose-500 dark:text-rose-400" />
-          <h3 className="font-medium text-sm">이번 달 지출</h3>
+          <h3 className="font-medium text-sm">
+            {language === 'kr' ? '이번 달 지출' : "This Month's Expenses"}
+          </h3>
         </div>
         <p className="text-3xl font-bold text-rose-600 dark:text-rose-400">
           {formatCurrency(expense)}

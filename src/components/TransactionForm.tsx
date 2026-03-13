@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Transaction } from '@/types';
 import { PlusCircle } from 'lucide-react';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface TransactionFormProps {
   onAdd: (transaction: Omit<Transaction, 'id'>) => Promise<void>;
@@ -13,6 +14,7 @@ const CATEGORIES = {
 };
 
 export default function TransactionForm({ onAdd, isLoading }: TransactionFormProps) {
+  const { language } = useTheme();
   const [type, setType] = useState<'income' | 'expense'>('expense');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [category, setCategory] = useState(CATEGORIES.expense[0]);
@@ -51,7 +53,7 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
       <button
         onClick={() => setIsOpen(true)}
         className="fixed bottom-8 right-8 bg-atl-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-atl-blue-700 hover:shadow-xl hover:scale-105 transition-all text-gray-800"
-        title="내역 추가"
+        title={language === 'kr' ? '내역 추가' : 'Add Transaction'}
       >
         <PlusCircle size={32} />
       </button>
@@ -61,7 +63,9 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50 text-gray-800 dark:text-atl-dark-text-strong">
       <div className="bg-white dark:bg-atl-dark-surface rounded-3xl p-6 w-full max-w-md shadow-2xl relative border border-transparent dark:border-white/10 transition-colors">
-        <h2 className="text-2xl font-bold mb-6">새 내역 추가</h2>
+        <h2 className="text-2xl font-bold mb-6">
+          {language === 'kr' ? '새 내역 추가' : 'Add Transaction'}
+        </h2>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Type Toggle */}
@@ -73,7 +77,7 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
               }`}
               onClick={() => handleTypeChange('expense')}
             >
-              지출
+              {language === 'kr' ? '지출' : 'Expense'}
             </button>
             <button
               type="button"
@@ -82,12 +86,14 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
               }`}
               onClick={() => handleTypeChange('income')}
             >
-              수입
+              {language === 'kr' ? '수입' : 'Income'}
             </button>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">날짜</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">
+              {language === 'kr' ? '날짜' : 'Date'}
+            </label>
             <input 
               type="date" 
               required
@@ -98,7 +104,9 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">카테고리</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">
+              {language === 'kr' ? '카테고리' : 'Category'}
+            </label>
             <select 
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -111,11 +119,13 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">결제수단</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">
+              {language === 'kr' ? '결제수단' : 'Payment Method'}
+            </label>
             <input 
               type="text" 
               required
-              placeholder="예: 신용카드, 체크카드, 카카오페이"
+              placeholder={language === 'kr' ? '예: 신용카드, 체크카드, 카카오페이' : 'e.g. Credit Card, Debit Card'}
               value={paymentMethod}
               onChange={(e) => setPaymentMethod(e.target.value)}
               className="w-full border border-gray-300 dark:border-atl-dark-border rounded-xl px-4 py-2 bg-white dark:bg-atl-dark-surface text-gray-900 dark:text-atl-dark-text-strong focus:ring-2 focus:ring-atl-blue-500 focus:border-atl-blue-500 outline-none transition-colors"
@@ -123,7 +133,9 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">금액 (원)</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">
+              {language === 'kr' ? '금액 (원)' : 'Amount (KRW)'}
+            </label>
             <input 
               type="number" 
               required
@@ -136,10 +148,12 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
           </div>
 
           <div>
-             <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">메모 (선택)</label>
+             <label className="block text-sm font-medium text-gray-700 dark:text-atl-dark-text mb-1">
+               {language === 'kr' ? '메모 (선택)' : 'Memo (Optional)'}
+             </label>
             <input 
               type="text" 
-              placeholder="내역 상세 입력"
+              placeholder={language === 'kr' ? '내역 상세 입력' : 'Additional details'}
               value={memo}
               onChange={(e) => setMemo(e.target.value)}
               className="w-full border border-gray-300 dark:border-atl-dark-border rounded-xl px-4 py-2 bg-white dark:bg-atl-dark-surface text-gray-900 dark:text-atl-dark-text-strong focus:ring-2 focus:ring-atl-blue-500 focus:border-atl-blue-500 outline-none transition-colors"
@@ -152,7 +166,7 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
               onClick={() => setIsOpen(false)}
               className="flex-1 py-3 px-4 bg-gray-100 dark:bg-atl-dark-bg hover:bg-gray-200 dark:hover:bg-white/10 text-gray-800 dark:text-atl-dark-text-strong rounded-xl font-medium transition-colors"
             >
-              취소
+              {language === 'kr' ? '취소' : 'Cancel'}
             </button>
             <button
               type="submit"
@@ -162,7 +176,7 @@ export default function TransactionForm({ onAdd, isLoading }: TransactionFormPro
               {isLoading ? (
                 <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
               ) : (
-                '저장하기'
+                language === 'kr' ? '저장하기' : 'Save'
               )}
             </button>
           </div>

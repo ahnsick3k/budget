@@ -1,13 +1,14 @@
 import React from 'react';
 import { Transaction } from '@/types';
 import { startOfMonth, endOfMonth, eachDayOfInterval, format, isSameMonth, isToday } from 'date-fns';
-import { ko } from 'date-fns/locale';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface CalendarViewProps {
   transactions: Transaction[];
 }
 
 export default function CalendarView({ transactions }: CalendarViewProps) {
+  const { language } = useTheme();
   const currentDate = new Date();
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(currentDate);
@@ -31,10 +32,15 @@ export default function CalendarView({ transactions }: CalendarViewProps) {
 
   return (
     <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-3xl p-6 shadow-sm border border-white/20 dark:border-white/5 overflow-hidden transition-colors">
-      <h2 className="text-xl font-bold mb-6 text-gray-800 dark:text-atl-dark-text-strong">이번 달 달력</h2>
+      <h2 className="text-xl font-bold mb-6 text-gray-800 dark:text-atl-dark-text-strong">
+        {language === 'kr' ? '이번 달 달력' : "This Month's Calendar"}
+      </h2>
       
       <div className="grid grid-cols-7 gap-1 mb-2">
-        {['일', '월', '화', '수', '목', '금', '토'].map(day => (
+        {(language === 'kr' 
+          ? ['일', '월', '화', '수', '목', '금', '토'] 
+          : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+        ).map(day => (
           <div key={day} className="text-center font-medium text-sm text-gray-500 dark:text-gray-400 py-2">
             {day}
           </div>

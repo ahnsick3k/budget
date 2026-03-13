@@ -1,6 +1,7 @@
 import React from 'react';
 import { Transaction } from '@/types';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface DashboardViewProps {
   transactions: Transaction[];
@@ -9,6 +10,8 @@ interface DashboardViewProps {
 const COLORS = ['#00B8FF', '#0093cc', '#006e99', '#33c9ff', '#66d6ff', '#99e4ff', '#004a66'];
 
 export default function DashboardView({ transactions }: DashboardViewProps) {
+  const { language } = useTheme();
+  
   const currentMonthTransactions = transactions.filter((t) => {
     const d = new Date(t.date);
     const now = new Date();
@@ -28,11 +31,13 @@ export default function DashboardView({ transactions }: DashboardViewProps) {
 
   return (
     <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-3xl p-6 shadow-sm border border-white/20 dark:border-white/5 h-[450px] flex flex-col transition-colors">
-      <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-atl-dark-text-strong">카테고리별 지출 통계</h2>
+      <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-atl-dark-text-strong">
+        {language === 'kr' ? '카테고리별 지출 통계' : 'Expenses by Category'}
+      </h2>
       
       {pieData.length === 0 ? (
         <div className="flex-1 flex items-center justify-center text-gray-500 dark:text-atl-dark-text">
-          이번 달 지출 내역이 없습니다.
+          {language === 'kr' ? '이번 달 지출 내역이 없습니다.' : 'No expenses for this month.'}
         </div>
       ) : (
         <div className="flex-1 w-full min-h-0">

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Transaction } from '@/types';
 import { CreditCard } from 'lucide-react';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface CardSummaryViewProps {
   transactions: Transaction[];
 }
 
 export default function CardSummaryView({ transactions }: CardSummaryViewProps) {
+  const { language } = useTheme();
+  
   const currentMonthTransactions = transactions.filter((t) => {
     const d = new Date(t.date);
     const now = new Date();
@@ -35,12 +38,14 @@ export default function CardSummaryView({ transactions }: CardSummaryViewProps) 
     <div className="bg-white/70 dark:bg-atl-dark-surface backdrop-blur-md rounded-3xl p-6 shadow-sm border border-white/20 dark:border-white/5 transition-colors">
       <div className="flex items-center gap-3 mb-6">
         <CreditCard className="text-atl-blue-500 dark:text-atl-blue-400" size={24} />
-        <h2 className="text-xl font-bold text-gray-800 dark:text-atl-dark-text-strong">결제 수단별 분석</h2>
+        <h2 className="text-xl font-bold text-gray-800 dark:text-atl-dark-text-strong">
+          {language === 'kr' ? '결제 수단별 분석' : 'Payment Method Analysis'}
+        </h2>
       </div>
 
       {sortedSummary.length === 0 ? (
         <div className="text-center py-12 text-gray-500 dark:text-atl-dark-text">
-          이번 달 지출 내역이 없습니다.
+          {language === 'kr' ? '이번 달 지출 내역이 없습니다.' : 'No expenses for this month.'}
         </div>
       ) : (
         <div className="space-y-4">

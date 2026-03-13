@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { UploadCloud, LayoutList, Calendar, CreditCard, PieChart } from 'lucide-react';
 import Papa from 'papaparse';
 import { Transaction } from '@/types';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 export type ViewMode = 'list' | 'calendar' | 'card' | 'dashboard';
 
@@ -14,6 +15,7 @@ interface GNBProps {
 
 export default function GNB({ currentView, onViewChange, onCsvUpload, isUploading }: GNBProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { language } = useTheme();
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -48,10 +50,10 @@ export default function GNB({ currentView, onViewChange, onCsvUpload, isUploadin
   };
 
   const navItems = [
-    { id: 'list', label: '목록', icon: LayoutList },
-    { id: 'calendar', label: '달력', icon: Calendar },
-    { id: 'card', label: '카드별', icon: CreditCard },
-    { id: 'dashboard', label: '통계', icon: PieChart },
+    { id: 'list', label: language === 'kr' ? '목록' : 'List', icon: LayoutList },
+    { id: 'calendar', label: language === 'kr' ? '달력' : 'Calendar', icon: Calendar },
+    { id: 'card', label: language === 'kr' ? '카드별' : 'Cards', icon: CreditCard },
+    { id: 'dashboard', label: language === 'kr' ? '통계' : 'Dashboard', icon: PieChart },
   ];
 
   return (
@@ -91,7 +93,11 @@ export default function GNB({ currentView, onViewChange, onCsvUpload, isUploadin
           ) : (
              <UploadCloud size={16} />
           )}
-          <span className="hidden sm:inline">{isUploading ? '업로드 중...' : 'CSV 업로드'}</span>
+          <span className="hidden sm:inline">
+            {isUploading 
+              ? (language === 'kr' ? '업로드 중...' : 'Uploading...') 
+              : (language === 'kr' ? 'CSV 업로드' : 'CSV Upload')}
+          </span>
         </button>
       </div>
     </nav>
