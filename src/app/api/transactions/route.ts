@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 async function getFirstSheetName(sheets: any) {
   const info = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
-  return info.data.sheets[0].properties.title;
+  return info.data.sheets?.[0]?.properties?.title || 'Sheet1';
 }
 
 export async function GET() {
@@ -134,7 +134,11 @@ export async function DELETE(request: Request) {
 
     // get sheetId (gid)
     const info = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
-    const sheetId = info.data.sheets[0].properties.sheetId;
+    const sheetId = info.data.sheets?.[0]?.properties?.sheetId;
+
+    if (sheetId === undefined) {
+      return NextResponse.json({ error: 'Failed to retrieve sheet ID' }, { status: 500 });
+    }
 
     await sheets.spreadsheets.batchUpdate({
       spreadsheetId: SPREADSHEET_ID,
