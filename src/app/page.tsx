@@ -112,7 +112,7 @@ export default function Home() {
         <header className="mb-8 flex justify-between items-start sm:items-end flex-col sm:flex-row gap-4">
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight mb-2 flex items-center gap-2 text-slate-900 dark:text-white">
-              <Wallet className="w-8 h-8 text-atl-blue-500 dark:text-white" />
+              <Wallet className="w-8 h-8" />
               {language === 'kr' ? '나의 가계부' : 'My BudgetBook'}
             </h1>
             <p className="text-slate-500 dark:text-blue-200 font-medium">
