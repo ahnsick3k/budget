@@ -104,51 +104,47 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-atl-dark-bg text-slate-900 dark:text-atl-dark-text-strong font-sans selection:bg-atl-blue-100 dark:selection:bg-atl-blue-900 transition-colors duration-200">
+    <div className="min-h-screen bg-slate-50 dark:bg-atl-dark-bg text-slate-900 dark:text-atl-dark-text-strong pb-24 font-sans selection:bg-atl-blue-100 dark:selection:bg-atl-blue-900 transition-colors duration-200">
+      {/* Header Decorative Background */}
+      <div className="bg-slate-100 dark:bg-atl-blue-900 h-52 absolute top-0 left-0 w-full -z-10 rounded-b-[3rem] transition-colors duration-200"></div>
 
-      {/* ══ Hero Header ══ */}
-      <div className="bg-atl-blue-600 dark:bg-atl-blue-900 rounded-b-[3rem] shadow-md transition-colors duration-200">
-        <div className="max-w-4xl mx-auto px-4 pt-12 pb-16">
-          <header className="flex justify-between items-start sm:items-end flex-col sm:flex-row gap-4">
-            <div>
-              <h1 className="text-3xl font-extrabold tracking-tight mb-2 flex items-center gap-2 text-white">
-                <Wallet className="w-8 h-8" />
-                {language === 'kr' ? '나의 가계부' : 'My BudgetBook'}
-              </h1>
-              <p className="text-blue-100 font-medium">
-                {language === 'kr' ? '스마트하게 관리하는 자산 현황' : 'Managing your assets smartly'}
-              </p>
+      <main className="max-w-4xl mx-auto px-4 pt-12">
+        <header className="mb-8 flex justify-between items-start sm:items-end flex-col sm:flex-row gap-4">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight mb-2 flex items-center gap-2 text-slate-900 dark:text-white">
+              <Wallet className="w-8 h-8 text-atl-blue-500 dark:text-white" />
+              {language === 'kr' ? '나의 가계부' : 'My BudgetBook'}
+            </h1>
+            <p className="text-slate-500 dark:text-blue-200 font-medium">
+              {language === 'kr' ? '스마트하게 관리하는 자산 현황' : 'Managing your assets smartly'}
+            </p>
+          </div>
+          <div className="flex gap-3 items-center">
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-200/80 dark:bg-white/25 hover:bg-slate-300 dark:hover:bg-white/40 shadow border border-slate-300 dark:border-white/40 text-slate-700 dark:text-white font-semibold text-sm transition-colors"
+              title="언어 변경 / Language"
+            >
+              <Globe size={16} />
+              {language === 'kr' ? 'EN' : 'KR'}
+            </button>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-slate-200/80 dark:bg-white/25 hover:bg-slate-300 dark:hover:bg-white/40 shadow border border-slate-300 dark:border-white/40 text-slate-700 dark:text-white transition-colors"
+              title="테마 변경 / Theme"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            {/* User Avatar */}
+            <div className="w-10 h-10 rounded-full bg-slate-200/80 dark:bg-white/25 shadow flex items-center justify-center border border-slate-300 dark:border-white/40 text-slate-700 dark:text-white font-bold ml-1">
+              Me
             </div>
-            <div className="flex gap-3 items-center">
-              {/* Language Toggle */}
-              <button
-                onClick={toggleLanguage}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/25 hover:bg-white/40 shadow border border-white/40 text-white font-semibold text-sm transition-colors"
-                title="언어 변경 / Language"
-              >
-                <Globe size={16} />
-                {language === 'kr' ? 'EN' : 'KR'}
-              </button>
-
-              {/* Theme Toggle */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-full bg-white/25 hover:bg-white/40 shadow border border-white/40 text-white transition-colors"
-                title="테마 변경 / Theme"
-              >
-                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
-
-              {/* User Avatar */}
-              <div className="w-10 h-10 rounded-full bg-white/25 shadow flex items-center justify-center border border-white/40 text-white font-bold ml-1">
-                Me
-              </div>
-            </div>
-          </header>
-        </div>
-      </div>
-
-      <main className="max-w-4xl mx-auto px-4 -mt-8 pb-24">
+          </div>
+        </header>
 
         <GNB 
           currentView={viewMode} 
