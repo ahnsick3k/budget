@@ -1,0 +1,4 @@
+Date,Type,Category,PaymentMethod,Amount,Memo
+2026-03-12,expense,식비,카카오페이,12000,점심
+2026-03-11,expense,교통비,신용카드,50000,광역버스
+2026-03-10,income,급여,계좌이체,3000000,월급

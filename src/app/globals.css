@@ -1,26 +1,23 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-socar-50: #e5f8ff;
+  --color-socar-100: #ccf1ff;
+  --color-socar-200: #99e4ff;
+  --color-socar-300: #66d6ff;
+  --color-socar-400: #33c9ff;
+  --color-socar-500: #00b8ff;
+  --color-socar-600: #0093cc;
+  --color-socar-700: #006e99;
+  --color-socar-800: #004a66;
+  --color-socar-900: #002533;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-socar-dark: #1A1F2C; /* Navy Dark Base */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: 'Pretendard', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
